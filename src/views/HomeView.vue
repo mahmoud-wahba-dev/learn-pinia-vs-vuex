@@ -1,10 +1,11 @@
 <template>
   <div class="home">
     <h1>this is home page</h1>
-    <h3>my name is: {{ this.$store.state.name }}</h3>
-    <h4>age is : {{ this.$store.state.age }}</h4>
+    <h2>
+      {{ this.$store.getters.getNameWithTitle }}
+    </h2>
     <div>
-      <input type="text" v-model="this.$store.state.name" />
+      <button @click="changeTitle">fire mutation</button>
     </div>
   </div>
 </template>
@@ -20,8 +21,13 @@ export default {
   //     age: 28,
   //   };
   // },
-  mounted() {
-    console.log(this.$store);
+  // mounted() {
+  //   console.log(this.$store);
+  // },
+  methods: {
+    changeTitle() {
+      this.$store.commit("changeTitle");
+    },
   },
 };
 </script>
