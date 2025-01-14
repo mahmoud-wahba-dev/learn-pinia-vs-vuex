@@ -1,27 +1,31 @@
 <template>
-  <div>
-    <h1>hello</h1>
-    <h3>state counter is {{ productsModule.counter }}</h3>
-    <h3>getter is {{ getters.multiblyCntr }}</h3>
-    <div>
-      <button @click="store.commit('inc')">increase</button>
-      <button @click="store.commit('dec')">decrease</button>
-    </div>
-    <div>
-      <button @click="store.dispatch('increase')">increase</button>
-      <button @click="store.dispatch('decreament')">decrease</button>
-    </div>
-    <div>
-      <input type="number" v-model="productsModule.counter" />
-    </div>
-  </div>
+  <div>state count is {{ count }}</div>
+  <h2>store getter is {{ storeGetter }}</h2>
+  <h2>actions <button @click="increase">increase</button></h2>
+  <h2>actions <button @click="decrease">decrease</button></h2>
 </template>
 
-<script setup>
-import { useStore } from "vuex";
-console.log(useStore().getters);
-const store = useStore();
-const productsModule = store.state.productsModule;
-const getters = store.getters;
-console.log(store, "store");
+<script>
+import { counterStore } from "@/store/counterStore.js";
+import { mapState, mapActions } from "pinia";
+
+export default {
+  // computed: {
+  //   ...mapState(counterStore, {
+  //     myCount: (state) => state.count,
+  //   }),
+  // },
+  computed: {
+    ...mapState(counterStore, ["count"]),
+    storeGetter() {
+      return counterStore().countPlusOne; // this will call the getter method
+    },
+  },
+  methods: {
+    ...mapActions(counterStore, ["increase", "decrease"]),
+  },
+  mounted() {
+    console.log(counterStore().increase());
+  },
+};
 </script>

@@ -4,9 +4,5 @@
   </div>
 </template>
 <script>
-export default {
-  mounted() {
-    console.log(this.$store);
-  },
-};
+export default {};
 </script>
