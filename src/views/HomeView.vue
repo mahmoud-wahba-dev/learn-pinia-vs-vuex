@@ -1,46 +1,28 @@
 <template>
-  <div class="home">
-    <h1>this is home page</h1>
-    <h2>
-      {{ this.$store.getters.getNameWithTitle }}
-    </h2>
-
-    <div>
-      <ul>
-        <li
-          v-for="product in this.$store.state.productsModule.products"
-          :key="product.id"
-        >
-          {{ product.title }}
-        </li>
-      </ul>
-    </div>
-    <div>
-      <button @click="this.$store.dispatch('doGetproducts')">
-        get product
-      </button>
-    </div>
+  <div>
+    <h1>name is {{ this.$store.state.productsModule.name }}</h1>
+    <button @click="changeName">update</button>
+    <!-- <h1>user iss {{ addTitle }}</h1> -->
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-
+import { mapMutations } from "vuex";
 export default {
   name: "HomeView",
-  // data() {
-  //   return {
-  //     name: "ahmed elmasry",
-  //     age: 28,
-  //   };
+  methods: {
+    ...mapMutations(["changeName"]),
+  },
+  // computed: {
+  //   ...mapGetters(["addTitle"]),
+  // },
+  // computed: {
+  //   ...mapState(["productsModule"]),
   // },
   // mounted() {
-  //   console.log(this.$store);
+  // console.log(productsModuleu);
+
+  // console.log(this.$store.state.productsModule.name);
   // },
-  methods: {
-    changeTitle() {
-      this.$store.commit("changeTitle");
-    },
-  },
 };
 </script>
