@@ -4,8 +4,21 @@
     <h2>
       {{ this.$store.getters.getNameWithTitle }}
     </h2>
+
     <div>
-      <button @click="changeTitle">fire mutation</button>
+      <ul>
+        <li
+          v-for="product in this.$store.state.productsModule.products"
+          :key="product.id"
+        >
+          {{ product.title }}
+        </li>
+      </ul>
+    </div>
+    <div>
+      <button @click="this.$store.dispatch('doGetproducts')">
+        get product
+      </button>
     </div>
   </div>
 </template>
