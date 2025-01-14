@@ -1,28 +1,27 @@
 <template>
   <div>
-    <h1>name is {{ this.$store.state.productsModule.name }}</h1>
-    <button @click="changeName">update</button>
-    <!-- <h1>user iss {{ addTitle }}</h1> -->
+    <h1>hello</h1>
+    <h3>state counter is {{ productsModule.counter }}</h3>
+    <h3>getter is {{ getters.multiblyCntr }}</h3>
+    <div>
+      <button @click="store.commit('inc')">increase</button>
+      <button @click="store.commit('dec')">decrease</button>
+    </div>
+    <div>
+      <button @click="store.dispatch('increase')">increase</button>
+      <button @click="store.dispatch('decreament')">decrease</button>
+    </div>
+    <div>
+      <input type="number" v-model="productsModule.counter" />
+    </div>
   </div>
 </template>
 
-<script>
-import { mapMutations } from "vuex";
-export default {
-  name: "HomeView",
-  methods: {
-    ...mapMutations(["changeName"]),
-  },
-  // computed: {
-  //   ...mapGetters(["addTitle"]),
-  // },
-  // computed: {
-  //   ...mapState(["productsModule"]),
-  // },
-  // mounted() {
-  // console.log(productsModuleu);
-
-  // console.log(this.$store.state.productsModule.name);
-  // },
-};
+<script setup>
+import { useStore } from "vuex";
+console.log(useStore().getters);
+const store = useStore();
+const productsModule = store.state.productsModule;
+const getters = store.getters;
+console.log(store, "store");
 </script>
